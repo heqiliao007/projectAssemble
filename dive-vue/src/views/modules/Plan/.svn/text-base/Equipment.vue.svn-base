@@ -1,0 +1,784 @@
+<template>
+    <div>
+        <!-- <common-header :headChange="headChange"></common-header>
+        <el-row class="plan">
+          <el-col :span="4">
+              <common-plan-sidebar :curIndex='curIndex'></common-plan-sidebar>
+          </el-col>
+          <el-col :span="20"> -->
+            <el-row class="grid-content" style="position: relative;">
+              <span style="position:absolute;right:39px;top:40px;" class="add-del">
+                <img src="../../../assets/img/figure/narrow.png" style="margin-right:10px;"/>
+                <img src="../../../assets/img/figure/enlarge.png"/>
+              </span>
+              <!-- 上面tab -->
+              <el-tabs v-model="activeName" @tab-click="handleClick"  class="tabs" style="height:300px;">
+                <!-- 作业平台 -->
+                <el-tab-pane label="作业平台" name="first" class="platform">
+                  <!-- :header-cell-class-name="headerstyle" -->
+                    <el-table
+                      border
+                      max-height="190"
+                      :data = "homeworkData"
+                      :cell-style="{fontSize:'18px'}"
+                      class="homework_table tables"
+                      :header-cell-class-name="rowClass"
+                      >
+                      <el-table-column prop="platform" label="作业平台" align="center">
+                        <template slot-scope="scope">
+                          <el-input v-model="scope.row.platform"></el-input>
+                        </template>
+                      </el-table-column>
+                      <el-table-column prop="person" label="负责人" align="center">
+                        <template slot-scope="scope">
+                          <el-input v-model="scope.row.person"></el-input>
+                        </template>
+                      </el-table-column>
+                      <el-table-column prop="task" label="负责人任务" align="center">
+                        <template slot-scope="scope">
+                            <el-select v-model="scope.row.task" placeholder="请选择负责人任务">
+                                <el-option label="指挥员" value="zhy"></el-option>
+                                <el-option label="监督" value="jd"></el-option>
+                                <el-option label="潜水员" value="qsy"></el-option>
+                                <el-option label="军医" value="jy"></el-option>
+                                <el-option label="任务总指挥" value="rwzzh"></el-option>
+                                <el-option label="现场总指挥" value="xczzh"></el-option>
+                                <el-option label="潜水长" value="qsz"></el-option>
+                                <el-option label="主任" value="zr"></el-option>
+                                <el-option label="副主任" value="fzr"></el-option>
+                                <el-option label="参谋" value="zm"></el-option>
+                            </el-select>
+                        </template>
+                      </el-table-column>
+                  </el-table>
+                </el-tab-pane>
+                <!-- 潜水装具 -->
+                <el-tab-pane label="潜水装具" name="second">
+                  <el-tabs :tab-position="tabPosition" style="height: 200px;" class="left_table">
+                      <!-- 作业装具--辅助装具 -->
+                    <el-tab-pane label="辅助装具">
+                      <el-table
+                        border
+                        max-height="190"
+                        :data = "harnessData"
+                        :cell-style="{fontSize:'18px'}"
+                        class="harness_table tables"
+                        :header-cell-class-name="rowClass"
+                        >
+                        <el-table-column prop="name" label="装备名称" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.name"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="number" label="需要数量" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.number"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="region" label="来源" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.region"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="person" label="负责人" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.person"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="task" label="负责人任务" align="center">
+                          <template slot-scope="scope">
+                            <!-- <el-form ref="homework_form" :model="homework_form" label-width="20%"> -->
+                              <el-select v-model="scope.row.task" placeholder="请选择负责人任务">
+                                  <el-option label="指挥员" value="zhy"></el-option>
+                                  <el-option label="监督" value="jd"></el-option>
+                                  <el-option label="潜水员" value="qsy"></el-option>
+                                  <el-option label="军医" value="jy"></el-option>
+                                  <el-option label="任务总指挥" value="rwzzh"></el-option>
+                                  <el-option label="现场总指挥" value="xczzh"></el-option>
+                                  <el-option label="潜水长" value="qsz"></el-option>
+                                  <el-option label="主任" value="zr"></el-option>
+                                  <el-option label="副主任" value="fzr"></el-option>
+                                  <el-option label="参谋" value="zm"></el-option>
+                              </el-select>
+                            <!-- </el-form> -->
+                          </template>
+                        </el-table-column>
+                      </el-table> 
+                    </el-tab-pane>
+                    <!-- 潜水装具--作业装具 -->
+                    <el-tab-pane label="作业装具">
+                      <el-table
+                        border
+                        max-height="190"
+                        :data = "harnessData"
+                        :cell-style="{fontSize:'18px'}"
+                        class="harness_table tables"
+                        :header-cell-class-name="rowClass"
+                        >
+                        <el-table-column prop="name" label="装备名称" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.name"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="number" label="需要数量" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.number"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="region" label="来源" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.region"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="person" label="负责人" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.person"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="task" label="负责人任务" align="center">
+                          <template slot-scope="scope">
+                            <!-- <el-form ref="homework_form" :model="homework_form" label-width="20%"> -->
+                              <el-select v-model="scope.row.task" placeholder="请选择负责人任务">
+                                  <el-option label="指挥员" value="zhy"></el-option>
+                                  <el-option label="监督" value="jd"></el-option>
+                                  <el-option label="潜水员" value="qsy"></el-option>
+                                  <el-option label="军医" value="jy"></el-option>
+                                  <el-option label="任务总指挥" value="rwzzh"></el-option>
+                                  <el-option label="现场总指挥" value="xczzh"></el-option>
+                                  <el-option label="潜水长" value="qsz"></el-option>
+                                  <el-option label="主任" value="zr"></el-option>
+                                  <el-option label="副主任" value="fzr"></el-option>
+                                  <el-option label="参谋" value="zm"></el-option>
+                              </el-select>
+                            <!-- </el-form> -->
+                          </template>
+                        </el-table-column>
+                      </el-table>
+                    </el-tab-pane>
+                  </el-tabs>
+                </el-tab-pane>
+                <!-- 供气系统 -->
+                <el-tab-pane label="供气系统" name="third">
+                  <el-tabs :tab-position="tabPosition" style="height: 200px;" class="left_table">
+                    <!-- 供气系统--空气压榨机 -->
+                    <el-tab-pane label="空气压榨机">
+                      <el-table
+                        border
+                        max-height="190"
+                        :data = "supplyData"
+                        :cell-style="{fontSize:'18px'}"
+                        class="supply_table tables"
+                        :header-cell-class-name="rowClass"
+                        >
+                        <el-table-column prop="name" label="装备名称" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.name"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="number" label="需要数量" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.number"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="production" label="产（储）气量" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.production"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="person" label="负责人" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.person"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="task" label="负责人任务" align="center">
+                          <template slot-scope="scope">
+                            <!-- <el-form ref="supply_form" :model="homework_form" label-width="20%"> -->
+                              <el-select v-model="scope.row.task" placeholder="请选择负责人任务">
+                                  <el-option label="指挥员" value="zhy"></el-option>
+                                  <el-option label="监督" value="jd"></el-option>
+                                  <el-option label="潜水员" value="qsy"></el-option>
+                                  <el-option label="军医" value="jy"></el-option>
+                                  <el-option label="任务总指挥" value="rwzzh"></el-option>
+                                  <el-option label="现场总指挥" value="xczzh"></el-option>
+                                  <el-option label="潜水长" value="qsz"></el-option>
+                                  <el-option label="主任" value="zr"></el-option>
+                                  <el-option label="副主任" value="fzr"></el-option>
+                                  <el-option label="参谋" value="zm"></el-option>
+                              </el-select>
+                            <!-- </el-form> -->
+                          </template>
+                        </el-table-column>
+                      </el-table> 
+                    </el-tab-pane>
+                    <!-- 供气系统--储供气系统 -->
+                    <el-tab-pane label="储供气系统">
+                      <el-table
+                        border
+                        max-height="190"
+                        :data = "supplyData"
+                        :cell-style="{fontSize:'18px'}"
+                        class="supply_table tables"
+                        :header-cell-class-name="rowClass"
+                        >
+                        <el-table-column prop="name" label="装备名称" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.name"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="number" label="需要数量" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.number"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="production" label="产（储）气量" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.production"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="person" label="负责人" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.person"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="task" label="负责人任务" align="center">
+                          <template slot-scope="scope">
+                            <!-- <el-form ref="supply_form" :model="homework_form" label-width="20%"> -->
+                              <el-select v-model="scope.row.task" placeholder="请选择负责人任务">
+                                  <el-option label="指挥员" value="zhy"></el-option>
+                                  <el-option label="监督" value="jd"></el-option>
+                                  <el-option label="潜水员" value="qsy"></el-option>
+                                  <el-option label="军医" value="jy"></el-option>
+                                  <el-option label="任务总指挥" value="rwzzh"></el-option>
+                                  <el-option label="现场总指挥" value="xczzh"></el-option>
+                                  <el-option label="潜水长" value="qsz"></el-option>
+                                  <el-option label="主任" value="zr"></el-option>
+                                  <el-option label="副主任" value="fzr"></el-option>
+                                  <el-option label="参谋" value="zm"></el-option>
+                              </el-select>
+                            <!-- </el-form> -->
+                          </template>
+                        </el-table-column>
+                      </el-table>
+                    </el-tab-pane>
+                    <!-- 供气系统--配气系统 -->
+                     <el-tab-pane label="配气系统">
+                      <el-table
+                        border
+                        max-height="190"
+                        :data = "supplyData"
+                        :cell-style="{fontSize:'18px'}"
+                        class="supply_table tables"
+                        :header-cell-class-name="rowClass"
+                        >
+                        <el-table-column prop="name" label="装备名称" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.name"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="number" label="需要数量" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.number"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="production" label="产（储）气量" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.production"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="person" label="负责人" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.person"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="task" label="负责人任务" align="center">
+                          <template slot-scope="scope">
+                            <!-- <el-form ref="supply_form" :model="homework_form" label-width="20%"> -->
+                              <el-select v-model="scope.row.task" placeholder="请选择负责人任务">
+                                  <el-option label="指挥员" value="zhy"></el-option>
+                                  <el-option label="监督" value="jd"></el-option>
+                                  <el-option label="潜水员" value="qsy"></el-option>
+                                  <el-option label="军医" value="jy"></el-option>
+                                  <el-option label="任务总指挥" value="rwzzh"></el-option>
+                                  <el-option label="现场总指挥" value="xczzh"></el-option>
+                                  <el-option label="潜水长" value="qsz"></el-option>
+                                  <el-option label="主任" value="zr"></el-option>
+                                  <el-option label="副主任" value="fzr"></el-option>
+                                  <el-option label="参谋" value="zm"></el-option>
+                              </el-select>
+                            <!-- </el-form> -->
+                          </template>
+                        </el-table-column>
+                      </el-table>
+                    </el-tab-pane>
+                  </el-tabs>
+                </el-tab-pane>
+                <!-- 加压仓和潜水钟系统 -->
+                <el-tab-pane label="加压仓和潜水钟系统" name="fourth">
+                    <el-tabs :tab-position="tabPosition" style="height: 200px;" class="left_table">
+                      <!-- 加压仓和潜水钟系统--加压仓系统 -->
+                    <el-tab-pane label="加压仓系统">
+                      <el-table
+                        border
+                        max-height="190"
+                        :data = "addPreData"
+                        :cell-style="{fontSize:'18px'}"
+                        class="pressure_table tables"
+                        :header-cell-class-name="rowClass"
+                        >
+                        <el-table-column prop="region" label="来源" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.region"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="pressure" label="工作压(MPA)" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.pressure"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="type" label="可供气源类型" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.type"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="person" label="负责人" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.person"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="task" label="负责人任务" align="center">
+                          <template slot-scope="scope">
+                            <!-- <el-form ref="add_pre_form" :model="homework_form" label-width="20%"> -->
+                              <el-select v-model="scope.row.task" placeholder="请选择负责人任务">
+                                  <el-option label="指挥员" value="zhy"></el-option>
+                                  <el-option label="监督" value="jd"></el-option>
+                                  <el-option label="潜水员" value="qsy"></el-option>
+                                  <el-option label="军医" value="jy"></el-option>
+                                  <el-option label="任务总指挥" value="rwzzh"></el-option>
+                                  <el-option label="现场总指挥" value="xczzh"></el-option>
+                                  <el-option label="潜水长" value="qsz"></el-option>
+                                  <el-option label="主任" value="zr"></el-option>
+                                  <el-option label="副主任" value="fzr"></el-option>
+                                  <el-option label="参谋" value="zm"></el-option>
+                              </el-select>
+                            <!-- </el-form> -->
+                          </template>
+                        </el-table-column>
+                      </el-table> 
+                    </el-tab-pane>
+                    <!-- 加压仓和潜水钟系统--潜水钟系统 -->
+                    <el-tab-pane label="潜水钟系统">
+                      <el-table
+                        border
+                        max-height="190"
+                        :data = "addPreData"
+                        :cell-style="{fontSize:'18px'}"
+                        class="harness_table tables"
+                        :header-cell-class-name="rowClass"
+                        >
+                        <el-table-column prop="region" label="来源" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.region"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="pressure" label="工作压(MPA)" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.pressure"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="type" label="可供气源类型" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.type"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="person" label="负责人" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.person"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="task" label="负责人任务" align="center">
+                          <template slot-scope="scope">
+                            <!-- <el-form ref="add_pre_form" :model="homework_form" label-width="20%"> -->
+                              <el-select v-model="scope.row.task" placeholder="请选择负责人任务">
+                                  <el-option label="指挥员" value="zhy"></el-option>
+                                  <el-option label="监督" value="jd"></el-option>
+                                  <el-option label="潜水员" value="qsy"></el-option>
+                                  <el-option label="军医" value="jy"></el-option>
+                                  <el-option label="任务总指挥" value="rwzzh"></el-option>
+                                  <el-option label="现场总指挥" value="xczzh"></el-option>
+                                  <el-option label="潜水长" value="qsz"></el-option>
+                                  <el-option label="主任" value="zr"></el-option>
+                                  <el-option label="副主任" value="fzr"></el-option>
+                                  <el-option label="参谋" value="zm"></el-option>
+                              </el-select>
+                            <!-- </el-form> -->
+                          </template>
+                        </el-table-column>
+                      </el-table>
+                    </el-tab-pane>
+                  </el-tabs>
+                </el-tab-pane>
+              </el-tabs>
+              </el-row>
+
+              <!-- 下面tab -->
+              <el-row class="grid-content" style="position:relative;">
+                <span style="position:absolute;right:39px;top:40px;" class="add-del">
+                  <img src="../../../assets/img/figure/narrow.png" style="margin-right:10px;"/>
+                  <img src="../../../assets/img/figure/enlarge.png"/>
+                </span>
+                
+                <el-tabs v-model="activeName1" @tab-click="handleClick1" class="tabs" style="height:300px;">
+                    <!-- 辅助设备 -->
+                    <el-tab-pane label="其他辅助设备" name="first" class="auxiliary">
+                      <!-- :header-cell-class-name="headerstyle" -->
+                        <el-table
+                          border
+                          max-height="190"
+                          :data = "auxiliaryData"
+                          :cell-style="{fontSize:'18px'}"
+                          class="auxiliary_table tables"
+                          :header-cell-class-name="rowClass"
+                          >
+                          <el-table-column prop="name" label="名称" align="center">
+                            <template slot-scope="scope">
+                              <el-input v-model="scope.row.name"></el-input>
+                            </template>
+                          </el-table-column>
+                          <el-table-column prop="region" label="来源" align="center">
+                            <template slot-scope="scope">
+                              <el-input v-model="scope.row.region"></el-input>
+                            </template>
+                          </el-table-column>
+                          <el-table-column prop="performance" label="性能指标" align="center">
+                            <template slot-scope="scope">
+                              <el-input v-model="scope.row.performance"></el-input>
+                            </template>
+                          </el-table-column>
+                          <el-table-column prop="person" label="负责人" align="center">
+                            <template slot-scope="scope">
+                              <el-input v-model="scope.row.person"></el-input>
+                            </template>
+                          </el-table-column>
+                          <!-- 负责人 -->
+                          <el-table-column prop="task" label="负责人任务">
+                            <template slot-scope="scope">
+                              <!-- <el-form ref="auxiliary_form" :model="auxiliary_form" label-width="20%"> -->
+                                <el-select v-model="scope.row.task" placeholder="请选择负责人任务">
+                                    <el-option label="指挥员" value="zhy"></el-option>
+                                    <el-option label="监督" value="jd"></el-option>
+                                    <el-option label="潜水员" value="qsy"></el-option>
+                                    <el-option label="军医" value="jy"></el-option>
+                                    <el-option label="任务总指挥" value="rwzzh"></el-option>
+                                    <el-option label="现场总指挥" value="xczzh"></el-option>
+                                    <el-option label="潜水长" value="qsz"></el-option>
+                                    <el-option label="主任" value="zr"></el-option>
+                                    <el-option label="副主任" value="fzr"></el-option>
+                                    <el-option label="参谋" value="zm"></el-option>
+                                </el-select>
+                              <!-- </el-form> -->
+                            </template>
+                          </el-table-column>
+                      </el-table>
+                    </el-tab-pane>
+                    <!-- 水下作业工具 -->
+                    <el-tab-pane label="水下作业工具" name="second" class="work_tool">
+                        <!-- :header-cell-class-name="headerstyle" -->
+                      <el-table
+                        border
+                        max-height="190"
+                        :data = "toolData"
+                        :cell-style="{fontSize:'18px'}"
+                        class="dive_hw_table tables"
+                        :header-cell-class-name="rowClass"
+                      >
+                      <el-table-column prop="name" label="名称" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.name"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="region" label="来源" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.region"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="performance" label="性能" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.performance"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="number" label="需要数量" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.performance"></el-input>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="person" label="负责人" align="center">
+                          <template slot-scope="scope">
+                            <el-input v-model="scope.row.person"></el-input>
+                          </template>
+                        </el-table-column>
+                        <!-- 负责人 -->
+                        <el-table-column prop="task" label="负责人任务">
+                          <template slot-scope="scope">
+                            <!-- <el-form ref="tool_form" :model="tool_form" label-width="20%"> -->
+                              <el-select v-model="scope.row.task" placeholder="请选择负责人任务">
+                                  <el-option label="指挥员" value="zhy"></el-option>
+                                  <el-option label="监督" value="jd"></el-option>
+                                  <el-option label="潜水员" value="qsy"></el-option>
+                                  <el-option label="军医" value="jy"></el-option>
+                                  <el-option label="任务总指挥" value="rwzzh"></el-option>
+                                  <el-option label="现场总指挥" value="xczzh"></el-option>
+                                  <el-option label="潜水长" value="qsz"></el-option>
+                                  <el-option label="主任" value="zr"></el-option>
+                                  <el-option label="副主任" value="fzr"></el-option>
+                                  <el-option label="参谋" value="zm"></el-option>
+                              </el-select>
+                            <!-- </el-form> -->
+                          </template>
+                        </el-table-column>
+                      </el-table>
+                    </el-tab-pane>
+                  </el-tabs>
+                  <!-- 底部icon -->
+                  <el-row  type="flex" justify="end" class="icons">
+                    <span class="one_icon" title="保存">
+                    </span>
+                    <span class="two_icon" title="打印">
+                    </span>
+                    <span class="three_icon" title="疑难">
+                    </span>
+                    <span class="four_icon"  title="关闭">
+                    </span>
+                  </el-row>
+              </el-row>
+          <!-- </el-col>
+        </el-row> -->
+    </div>
+</template>
+
+<script>
+import commonHeader from '@/views/common/base/Header'
+import CommonPlanSidebar from '@/views/common/base/Plan_sidebar'
+import headerIcon from '@/assets/img/icon/header/plan.png'
+
+export default {
+  name: 'PlanEquipment',
+  components: {
+    commonHeader,
+    CommonPlanSidebar
+  },
+  data () {
+    return {
+      text: '潜水员是一类作业于特殊环境、使用特殊装备、掌握特殊技能的特种技术人员，对其规范管理是保证潜水作业安全实施的基础。本系统收集和管理潜水员的全部职业信息，便于各级机关科学管理。',
+      headChange: {
+        title: '潜水作业计划制定系统',
+        headIcon: headerIcon
+      },
+      // 方向
+      tabPosition: 'left',
+      activeName: 'first',
+      activeName1: 'first',
+      homeworkData: [
+        {
+          platform: '',
+          person: '张三',
+          task: '指挥员'
+        }
+      ],
+      homeworkData1: [
+        {
+          platform: '',
+          person: '张三',
+          task: '指挥员'
+        }
+      ],
+      harnessData: [
+        {
+          name: '',
+          numver: '',
+          region: '',
+          person: '张三',
+          task: '指挥员'
+        }
+      ],
+      supplyData: [
+        {
+          name: '',
+          production: '',
+          performance: '',
+          number: '0',
+          person: '张三',
+          task: '指挥员'
+        }
+      ],
+      addPreData: [
+        {
+          origin: '',
+          pressure: '',
+          type: '',
+          person: '张三',
+          task: '指挥员'
+        }
+      ],
+      auxiliaryData: [{
+        name: '',
+        region: '',
+        performance: '',
+        person: '张三',
+        task: '指挥员'
+      }],
+      toolData: [{
+        name: '',
+        region: '',
+        performance: '',
+        number: '0',
+        person: '张三',
+        task: '指挥员'
+      }]
+    }
+  },
+  methods: {
+    // :header-cell-style="{
+    //                     backgroundColor:'#F7FBFF',
+    //                     borderBottom:'none',
+    //                     fontSize:'18px',
+    //                     color: '#666'
+    //                   }"
+    handleClick (tab, event) {
+      console.log(tab, event)
+    },
+    handleClick1 (tab, event) {
+      console.log(tab, event)
+    },
+    rowClass (row) {
+      return 'rowClass'
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+    @import '~@/assets/scss/index.scss';
+    /deep/ .tabs .rowClass{
+        background-color: #F7FBFF;
+        border-bottom: none;
+        font-size: $text-size18;
+        color: #666;
+        border-left: 1px solid #AACEFE;
+        &:first-of-type{
+            border-left: 0;
+        }
+    }
+    /deep/ .tabs .el-tabs__item{
+      font-size: $text-size24;
+      color: $color-text-999;
+    }
+    /deep/ .tabs .left_table .el-tabs__item{
+      font-size: $text-size18;
+      color: $color-text-666;
+      background-color: $color-bg;
+    }
+    /deep/ .tabs .left_table .el-tabs__item.is-active{
+      color: $color-bg-white;
+      background-color: $color-border-blue;
+    }
+    /deep/ .tabs .left_table .el-tabs__active-bar{
+       height: 0!important;
+     }
+    /deep/ .tabs .el-tabs--left .el-tabs__nav-wrap.is-left{
+      margin-right: 0px;
+     }
+    /deep/ .tabs  .el-tabs__header{
+      margin: 6px 0 15px;
+    }
+    /deep/ .tabs .left_table .el-tabs__header{
+      padding-top: 11px;
+    }
+    /deep/ .tabs .el-tabs__item.is-active,/deep/ .tab-top  .el-tabs__item:hover{
+      color: $color-bg-blue;
+    }
+    /deep/ .tabs .el-tabs__nav-wrap::after{
+      height: 0;
+    }
+    /deep/ .tabs .el-tabs__active-bar{
+      height: 0;
+    }
+    /deep/ .tabs .el-select-dropdown__list .el-select-dropdown__item{
+      font-size: $text-size18;
+    }
+    /deep/ .tabs .el-input--medium{
+      font-size: $text-size18;
+    }
+   
+    .plan{
+      background-color: $color-bg;
+      display: flex;
+      align-items: stretch;
+      .grid-content {
+        margin:28px 39px 10px 28px;
+        background-color: $color-bg-white;
+        padding: 32px;
+          .tables{
+            border: 1px solid $color-border-blue;
+            margin-top:17px;
+            input{
+              width:100%;
+              height: 100%;
+              border: 0;
+            }
+          }
+          .add-del{
+            & img{
+              width: 36px;
+              height: 36px;
+              cursor: pointer;
+            }
+          }
+          .icons{
+            height: 58px;
+            padding-top:18px;
+            & span{
+                width: 36px;
+                height: 36px;
+                display: inline-block;
+                cursor: pointer;
+                margin-left: 10px;
+            }
+            .one_icon {
+                background: url(../../../assets/img/figure/baocun.png);
+                background-size:100% 100%;
+                
+            }
+            .one_icon:hover {
+                background: url(../../../assets/img/figure/baocun_select.png);
+                background-size:100% 100%;
+            }
+            .two_icon {
+                background: url(../../../assets/img/figure/dayin.png);
+                background-size:100% 100%;
+            }
+            .two_icon:hover {
+                background: url(../../../assets/img/figure/dayin_select.png);
+                background-size:100% 100%;
+            }
+            .three_icon {
+                background: url(../../../assets/img/figure/help_icon.png);
+                background-size:100% 100%;
+
+            }
+            .three_icon:hover {
+                background: url(../../../assets/img/figure/help_select.png);
+                background-size:100% 100%;
+            }
+            .four_icon {
+                background: url(../../../assets/img/figure/guanbi.png);
+                background-size:100% 100%;
+            }
+            .four_icon:hover {
+                background: url(../../../assets/img/figure/guanbi_select.png);
+                background-size:100% 100%;
+            }
+          } 
+      }
+      
+    }
+</style>

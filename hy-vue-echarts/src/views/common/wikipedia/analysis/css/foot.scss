@@ -1,0 +1,29 @@
+.footListBar{
+
+    width:100%;
+    outline: 1px solid #edee;
+    display: block;
+    //background: #00b180;
+    ul > {
+
+      li{
+        display: inline-block;
+      }
+
+      li{
+       border-right:1px solid #9E9E9E;
+        text-align: center;
+
+        //width:6em;
+        padding:0 1em;
+        //border:1px solid black;
+        box-sizing: border-box;
+        line-height: 30px;
+      }
+
+      li:first-of-type{
+        width:8em;
+      }
+    }
+
+}

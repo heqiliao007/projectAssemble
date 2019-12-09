@@ -1,0 +1,42 @@
+
+.charts {
+
+  .charts-analysis {
+    width: 166px;
+    background: white;
+
+    height: 300px;
+
+    > div {
+      width:90%;
+      margin:.3em auto;
+      > div:first-of-type {
+        line-height: 2em;
+        text-align: right;
+
+        h6 {
+          float: left;
+        }
+
+        i {
+          margin: 0 .2em;
+        }
+      }
+
+      > div:last-of-type {
+        margin-top:1em;
+        input{
+          margin-left:0;
+          margin-right:1em;
+        }
+
+      }
+
+    }
+
+  }
+
+
+}
+
+

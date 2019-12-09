@@ -1,0 +1,109 @@
+a{
+  color: #333333;
+}
+.search {
+    background: #fff;
+    height: 256px;
+}
+
+.search-main{
+    width: 1200px;
+    margin: 0 auto;
+    padding-top: 80px;
+}
+
+.zhiku-list {
+    text-align: center;
+    margin: 10px 0px;
+    padding: 50px 0;
+    background: #fff;
+    border: 1px solid rgba(222, 222, 222, 1);
+    cursor: pointer;
+}
+
+.zhiku-list:hover, .active{
+    box-shadow:0px 4px 16px 2px rgba(173,173,173,0.29);
+}
+
+.modul-title{
+    font-size: 24px;
+    line-height: 60px;
+}
+.grid-content{
+	min-height: 60px;
+}
+.row-bg {
+    padding: 10px 0;
+    background-color: #f9fafc;
+}
+
+.el-header,
+.el-footer {
+    padding: 0px;
+}
+
+.el-main {
+    padding: 0 20px;
+    margin: 10px 0;
+}
+
+.partner{
+    height: 275px;
+    background: #fff;
+    padding:0 20px;
+}
+
+.partner-pic{
+    width:100%;
+    padding-top:60px;
+}
+
+.partner-pic a{
+    width:14.28%;
+    float:left;
+    text-align:center;
+}
+
+.partner-pic a img{
+    width:80%;
+}
+
+.partner-h2{
+    height: 72px;
+    line-height: 72px;
+    font-family:MicrosoftYaHei-Bold;
+    font-weight:bold;
+    color:rgba(51,51,51,1);
+    padding-left: 20px;
+    border-bottom: 1px solid #DEDEDE;
+}
+
+.el-footer {
+    background: #3295d9;
+}
+
+.footer-logo{
+    text-align: center;
+    padding-top: 20px;
+}
+
+.footer-info{
+    text-align: center;
+    color: #fff;
+    margin-top: 30px;
+}
+
+.footer-info a{
+    margin:0 20px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-info p{
+    margin-top:20px;
+}
+
+.footer-code{
+    text-align: center;
+    padding-top: 30px;
+}

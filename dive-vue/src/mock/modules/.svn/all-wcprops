@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/hisw/!svn/ver/24658/dive_system/dive-vue/src/mock/modules
+END
+job-schedule.js
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/hisw/!svn/ver/24658/dive_system/dive-vue/src/mock/modules/job-schedule.js
+END
+oss.js
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/hisw/!svn/ver/24658/dive_system/dive-vue/src/mock/modules/oss.js
+END
+common.js
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/hisw/!svn/ver/24658/dive_system/dive-vue/src/mock/modules/common.js
+END
+sys-user.js
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/hisw/!svn/ver/24658/dive_system/dive-vue/src/mock/modules/sys-user.js
+END
+sys-log.js
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/hisw/!svn/ver/24658/dive_system/dive-vue/src/mock/modules/sys-log.js
+END
+sys-role.js
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/hisw/!svn/ver/24658/dive_system/dive-vue/src/mock/modules/sys-role.js
+END
+sys-menu.js
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/hisw/!svn/ver/24658/dive_system/dive-vue/src/mock/modules/sys-menu.js
+END
+sys-config.js
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/hisw/!svn/ver/24658/dive_system/dive-vue/src/mock/modules/sys-config.js
+END

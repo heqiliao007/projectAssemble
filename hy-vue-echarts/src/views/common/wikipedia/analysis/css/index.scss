@@ -1,0 +1,70 @@
+@import "./global";
+
+.analysis{
+  @import "./charts";
+  @import "./dimension";
+  @import "./foot";
+  @import "./global";
+  @import "./screen";
+  @import "./toolbar";
+
+  @import "./icons";
+}
+
+
+.analysis {
+  background: #ededed;
+  width: 1920px;
+  padding-top:5px;
+
+  .body-analysis {
+    >div{
+      display: inline-block;
+      vertical-align: top;
+
+      ul{
+        list-style: none;
+        padding:0;margin:0;
+      }
+
+    }
+
+    .tabs-analysis{
+      >div {
+        display: inline-block;
+        vertical-align: top;
+      }
+
+    }
+
+    .left-dimension-measure {
+      width: 193px;
+      //background-color: bisque;
+    }
+
+    .leftScreen {
+      width: 166px;
+      margin:0 .4em;
+    }
+
+    .chart {
+      >div {
+        width:1485px;
+      }
+      margin:auto 3px;
+      div:first-of-type{
+
+      }
+      div:last-of-type{
+
+      }
+
+    }
+
+  }
+
+  .floor {
+
+
+  }
+}

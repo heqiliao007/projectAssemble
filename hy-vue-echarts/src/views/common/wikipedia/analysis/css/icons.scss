@@ -1,0 +1,71 @@
+@mixin iconPath($name) {
+  content: url('./png/' + $name);
+}
+
+@mixin iconCreateName($className,$name) {
+  &#{$className}:before {
+    @include iconPath($name)
+  }
+}
+
+.el-icon- {
+  //el-icon-
+  //el-icon-${name}
+
+  &lookdata:before {
+    //content: url("../../icons/png/查看数据icon.png");
+    @include iconPath('查看数据icon.png');
+  }
+
+
+  @include iconCreateName('addTable', '添加icon.png');
+
+  @include iconCreateName('percentage', '百分比icon.png');
+
+  @include iconCreateName('showNumber', '度量icon.png');
+
+  @include iconCreateName('syllable', '字段icon.png');
+
+  @include iconCreateName('geography', '地理位置icon.png');
+
+  @include iconCreateName('AllDay', '单个及所有日期选择icon.png');
+
+  @include iconCreateName('colorIcon', '颜色icon.png');
+
+  @include iconCreateName('sizeIcon', '大小icon.png');
+
+  @include iconCreateName('MovieDataBase', '电影智库icon.png');
+
+  @include iconCreateName('saveIcon', '保存icon.png');
+
+  @include iconCreateName('i_5001', '行icon.png');
+  @include iconCreateName('i_5002', '列icon.png');
+
+  @include iconCreateName('i_5003', '添加icon.png');
+
+  @include iconCreateName('i_5004', '复制工作表icon.png');
+  @include iconCreateName('i_5005', '复制工作表-不能按icon.png');
+
+  @include iconCreateName('i_5006', '删除icon.png');
+  @include iconCreateName('i_5007', '删除-不能按icon.png');
+
+
+  @include iconCreateName('i_5008', '转换行列icon.png');
+  @include iconCreateName('i_5009', '转换行列-不能按icon.png');
+
+  @include iconCreateName('i_5010', '升序-能按icon.png');
+  @include iconCreateName('i_5011', '升序-不能按icon.png');
+
+  @include iconCreateName('i_5012', '降序-能按icon.png');
+  @include iconCreateName('i_5013', '降序-不能按icon.png');
+
+
+  @include iconCreateName('i_5016', '左箭头-不能按.png');
+  @include iconCreateName('i_5017', '左箭头-能按.png');
+  @include iconCreateName('i_5014', '右箭头-不能按.png');
+  @include iconCreateName('i_5015', '右箭头-能按.png');
+
+
+  @include iconCreateName('2', '日期范围选择icon.png');
+
+}

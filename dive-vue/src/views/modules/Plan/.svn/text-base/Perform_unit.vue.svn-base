@@ -1,0 +1,662 @@
+<template>
+  <div class="perform">
+    <div style="background:#eeeeee; min-height:840px; overflow: hidden;">
+      <div class="box_one">
+        <div class="add" style="position: absolute; top: 33px;right: 32px;">
+          <span class="minus">
+            <i class="el-icon-minus" @click="reduceData" style="cursor:pointer;"></i>
+            <i class="el-icon-plus" @click="addData" style="cursor:pointer;"></i>
+          </span>
+        </div>
+        <el-tabs v-model="activeName" style="width: 95%;margin: 30px auto;">
+          <!-- 潜水作业 -->
+          <el-tab-pane label="潜水作业" name="first">
+            <div class="border_one" style="border: 1px solid #AACEFE; min-height:550px;">
+              <div class="top" style="min-height:500px;">
+              <el-table
+                :data="divingWorkData"
+                :header-cell-class-name="handlemyclass"
+                :header-cell-style="headerstyle"
+                style="width: 100%;"
+                @row-click="chooseRow"
+                highlight-current-row
+                :row-class-name="tableRowClassName"
+              >
+              <el-table-column
+                label="单位名称"
+                align="center"
+                width="280">
+                <template slot-scope="scope">
+                  <el-tooltip content="添加、编辑、删除潜水作业单位" placement="bottom" effect="light">
+                    <el-input type="text" v-model="scope.row.unitName"/>
+                  </el-tooltip>
+                </template>
+              </el-table-column>
+              <el-table-column
+                label="分工"
+                align="center"
+                width="430">
+                <template slot-scope="scope">
+                  <el-tooltip content="添加、编辑、删除潜水作业单位" placement="bottom" effect="light">
+                    <el-input type="text" v-model="scope.row.distribution"/>
+                  </el-tooltip>
+                </template>
+              </el-table-column>
+              <el-table-column
+                label="负责人"
+                align="center"
+                width="180">
+                <template slot-scope="scope">
+                  <el-tooltip content="添加、编辑、删除潜水作业单位" placement="bottom" effect="light">
+                    <el-input type="text" v-model="scope.row.head"/>
+                  </el-tooltip>
+                </template>
+              </el-table-column>
+                <el-table-column
+                  label="负责人职务"
+                  align="center"
+                >
+                  <template slot-scope="scope">
+                    <el-tooltip content="添加、编辑、删除潜水作业单位" placement="bottom" effect="light">
+                      <el-select v-model="scope.row.post">
+                        <el-option  v-for="item in chargePostSelection" :key="item.value"  :label="item.label" :value="item.value">{{item.label}}</el-option>
+                      </el-select>
+                    </el-tooltip>
+                  </template>
+                </el-table-column>
+              </el-table>
+              </div>
+              </div>
+          </el-tab-pane>
+          <el-tab-pane label="医学保障" name="second">
+            <!-- 医学保障 -->
+            <div class="border_one" style="border: 1px solid #AACEFE; min-height:550px;">
+              <div class="top" style="min-height:500px;">
+              <el-table
+                :data="medicalSecuryData"
+                :header-cell-class-name="handlemyclass"
+                :header-cell-style="headerstyle"
+                style="width: 100%;"
+                @row-click="chooseRow"
+                highlight-current-row
+                :row-class-name="tableRowClassName"
+              >
+              <el-table-column
+                label="单位名称"
+                align="center"
+                width="280">
+                <template slot-scope="scope">
+                  <el-tooltip content="添加、编辑、删除医学保障单位" placement="bottom" effect="light">
+                    <el-input type="text" v-model="scope.row.unitName"/>
+                  </el-tooltip>
+                </template>
+              </el-table-column>
+              <el-table-column
+                label="分工"
+                align="center"
+                width="430">
+                <template slot-scope="scope">
+                  <el-tooltip content="添加、编辑、删除医学保障单位" placement="bottom" effect="light">
+                    <el-input type="text" v-model="scope.row.distribution"/>
+                  </el-tooltip>
+                </template>
+              </el-table-column>
+              <el-table-column
+                label="负责人"
+                align="center"
+                width="180">
+                <template slot-scope="scope">
+                  <el-tooltip content="添加、编辑、删除除医学保障单位" placement="bottom" effect="light">
+                    <el-input type="text" v-model="scope.row.head"/>
+                  </el-tooltip>
+                </template>
+              </el-table-column>
+                <el-table-column
+                  label="负责人职务"
+                  align="center"
+                >
+                  <template slot-scope="scope">
+                    <el-tooltip content="添加、编辑、删除医学保障单位" placement="bottom" effect="light">
+                      <el-select v-model="scope.row.post">
+                        <el-option  v-for="item in chargePostSelection" :key="item.value"  :label="item.label" :value="item.value">{{item.label}}</el-option>
+                      </el-select>
+                    </el-tooltip>
+                  </template>
+                </el-table-column>
+              </el-table>
+              </div>
+              </div>
+          </el-tab-pane>
+          <el-tab-pane label="设备保障" name="third">
+            <!-- 设备保障 -->
+            <div class="border_one" style="border: 1px solid #AACEFE; min-height:550px;">
+              <div class="top" style="min-height:500px;">
+              <el-table
+                :data="deviceSecuryData"
+                :header-cell-class-name="handlemyclass"
+                :header-cell-style="headerstyle"
+                style="width: 100%;"
+                @row-click="chooseRow"
+                highlight-current-row
+                :row-class-name="tableRowClassName"
+              >
+              <el-table-column
+                label="单位名称"
+                align="center"
+                width="280">
+                <template slot-scope="scope">
+                  <el-tooltip content="添加、编辑、删除设备保障单位" placement="bottom" effect="light">
+                    <el-input type="text" v-model="scope.row.unitName"/>
+                  </el-tooltip>
+                </template>
+              </el-table-column>
+              <el-table-column
+                label="分工"
+                align="center"
+                width="430">
+                <template slot-scope="scope">
+                  <el-tooltip content="添加、编辑、删除设备保障单位" placement="bottom" effect="light">
+                    <el-input type="text" v-model="scope.row.distribution"/>
+                  </el-tooltip>
+                </template>
+              </el-table-column>
+              <el-table-column
+                label="负责人"
+                align="center"
+                width="180">
+                <template slot-scope="scope">
+                  <el-tooltip content="添加、编辑、删除除设备保障单位" placement="bottom" effect="light">
+                    <el-input type="text" v-model="scope.row.head"/>
+                  </el-tooltip>
+                </template>
+              </el-table-column>
+                <el-table-column
+                  label="负责人职务"
+                  align="center"
+                >
+                  <template slot-scope="scope">
+                    <el-tooltip content="添加、编辑、删除设备保障单位" placement="bottom" effect="light">
+                      <el-select v-model="scope.row.post">
+                        <el-option  v-for="item in chargePostSelection" :key="item.value" :label="item.label" :value="item.value">{{item.label}}</el-option>
+                      </el-select>
+                    </el-tooltip>
+                  </template>
+                </el-table-column>
+              </el-table>
+              </div>
+            </div>
+          </el-tab-pane>
+        </el-tabs>
+        <div class="right" style="float:right; margin-right:32px;">
+          <div class="one_icon" title="保存" @click="onSubmit"></div>
+          <div class="two_icon" title="打印"></div>
+          <div class="three_icon" title="疑难"></div>
+          <div class="four_icon" title="关闭"></div>
+        </div>
+      </div>
+    </div>
+</div>
+    
+</template>
+
+<script>
+import { mapState } from 'vuex'
+
+export default {
+  name: 'Perform_unit',
+  data () {
+    return {
+      activeName: 'first',
+      // 潜水作业
+      divingWorkData: [],
+      // 医学保障
+      medicalSecuryData: [],
+      // 设备保障
+      deviceSecuryData: [],
+      // 潜水作业为空标志
+      diveNullSign: true,
+      // 医学保障为空标志
+      medicalNullSign: true,
+      // 设备保障为空标志
+      deviceNullSign: true,
+      pickerOptions: {
+        disabledDate (time) {
+          return time.getTime() > Date.now()
+        },
+        shortcuts: [
+          {
+            text: '今天',
+            onClick (picker) {
+              picker.$emit('pick', new Date())
+            }
+          },
+          {
+            text: '昨天',
+            onClick (picker) {
+              const date = new Date()
+              date.setTime(date.getTime() - 3600 * 1000 * 24)
+              picker.$emit('pick', date)
+            }
+          },
+          {
+            text: '一周前',
+            onClick (picker) {
+              const date = new Date()
+              date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
+              picker.$emit('pick', date)
+            }
+          }
+        ]
+      },
+      // 几个标识 代表某一模块某一行是否被选中点击
+      rowDiveSign: false,
+      rowMedicalSign: false,
+      rowEquipSign: false,
+      // 当前行
+      curRow: '',
+      // 负责人职务选项
+      chargePostSelection: '',
+      // 执行单位对象
+      executiveUnit: {
+        divingWorkData: [],
+        // 医学保障
+        medicalSecuryData: [],
+        // 设备保障
+        deviceSecuryData: []
+      }
+    }
+  },
+  mounted () {
+    this.getChargePost()
+    console.log(this.existId)
+    if (!this.existId !== true) {
+      this.getTableData()
+    }
+  },
+  computed: {
+    // 把planId缓存到mapstate里
+    ...mapState('planId', ['planId', 'existId', 'planType'])
+
+  },
+  methods: {
+    // 给每一行添加索引
+    tableRowClassName ({row, rowIndex}) {
+      row.index = rowIndex
+    },
+    // 选择某一行
+    chooseRow (row, event, column) {
+      let _this = this
+      _this.curRow = row.index
+      if (_this.activeName === 'first') {
+        // 潜水作业
+        _this.rowDiveSign = true
+      } else if (_this.activeName === 'second') {
+        // 医学保障
+        _this.rowMedicalSign = true
+      } else {
+        // 设备保障
+        _this.rowEquipSign = true
+      }
+    },
+    handlemyclass (row, column, rowIndex, columnIndex) {
+      // console.log(row.columnIndex)
+      if (row.columnIndex !== 5) {
+        // console.log(row, column, rowIndex, columnIndex)
+        return 'txt'
+      }
+    },
+    headerstyle () {
+      return 'background:rgba(244,249,255,1)'
+    },
+    // 添加行
+    addData () {
+      let _this = this
+      // console.log(_this.activeName)
+      if (_this.activeName === 'first') {
+        // 潜水作业
+        _this.divingWorkData.push({'unitName': '', 'distribution': '', 'head': '', 'post': ''})
+      } else if (_this.activeName === 'second') {
+        // 医学保障
+        _this.medicalSecuryData.push({'unitName': '', 'distribution': '', 'head': '', 'post': ''})
+      } else {
+        // 设备保障
+        _this.deviceSecuryData.push({'unitName': '', 'distribution': '', 'head': '', 'post': ''})
+      }
+      // console.log(_this.medicalSecuryData, _this.deviceSecuryData)
+    },
+    // 删除一行
+    reduceData () {
+      let _this = this
+      // console.log(_this.activeName)
+      if (_this.activeName === 'first') {
+        // 潜水资格
+        if (_this.rowDiveSign) {
+          _this.sureDelete(_this, _this.divingWorkData, _this.rowDiveSign)
+        } else {
+          _this.rowNull(_this)
+        }
+      } else if (_this.activeName === 'second') {
+        // 医学保障
+        if (_this.rowMedicalSign) {
+          _this.sureDelete(_this, _this.medicalSecuryData, _this.rowMedicalSign)
+        } else {
+          _this.rowNull(_this)
+        }
+      } else {
+        // 设备保障
+        if (_this.rowEquipSign) {
+          _this.sureDelete(_this, _this.deviceSecuryData, _this.rowEquipSign)
+        } else {
+          _this.rowNull(_this)
+        }
+      }
+    },
+    // 未选择时弹窗提示
+    rowNull (_this) {
+      _this.$alert('操作失败，请确认是否选择了数据', '操作失败', {
+        confirmButtonText: '确定'
+      })
+    },
+    // 选择时弹窗提示
+    sureDelete (_this, data, sign) {
+      _this.$confirm('请确认是否删除选中的数据?', '确认', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        data.splice(_this.curRow, 1)
+        sign = false
+      }).catch(() => {})
+    },
+    // 输入框为空弹窗
+    inputNull (text) {
+      this.$confirm(`${text}?`, '确认', {
+        confirmButtonText: '确定',
+        showCancelButton: false,
+        type: 'warning'
+      }).then(() => {
+        return false
+      }).catch(() => {
+        return false
+      })
+    },
+    // 负责人职务
+    getChargePost () {
+      this.$http({
+        url: this.$http.adornUrl('/sys/dict/getOneType'),
+        method: 'POST',
+        data: this.$http.adornData({
+          'type': 'people_duty'
+        })
+      }).then(({data}) => {
+        if (data && data.code === 0) {
+          console.log(data)
+          this.chargePostSelection = data.dict
+        }
+      })
+    },
+    // 提交
+    onSubmit () {
+      console.log(this.planId)
+      this.divingWorkData.forEach(item => {
+        // console.log(item.unitName, item.distribution, item.head, item.post)
+        if (item.unitName === '' || item.distribution === '' || item.head === '' || item.post === '') {
+          this.inputNull('潜水作业单位名称、分工、负责人、负责人职务不能为空，请确认')
+          this.diveNullSign = false
+        } else {
+          this.diveNullSign = true
+        }
+      })
+      this.medicalSecuryData.forEach(item => {
+        if (item.unitName === '' || item.distribution === '' || item.head === '' || item.post === '') {
+          this.inputNull('医学保障单位名称、分工、负责人、负责人职务不能为空，请确认')
+          this.medicalNullSign = false
+        } else {
+          this.medicalNullSign = true
+        }
+        // item.unitName = !item.unitName === true ? this.inputNull('医学保障单位名称不能为空，请确认') : item.unitName
+        // item.distribution = !item.distribution === true ? this.inputNull('医学保障分工不能为空，请确认') : item.distribution
+        // item.head = !item.head === true ? this.inputNull('医学保障负责人不能为空，请确认') : item.head
+        // item.post = !item.post === true ? this.inputNull('医学保障负责人职务不能为空，请确认') : item.post
+      })
+      this.deviceSecuryData.forEach(item => {
+        if (item.unitName === '' || item.distribution === '' || item.head === '' || item.post === '') {
+          this.inputNull('设备保障单位名称、分工、负责人、负责人职务不能为空，请确认')
+          this.deviceNullSign = false
+        } else {
+          this.deviceNullSign = true
+        }
+      })
+      if (this.diveNullSign && this.deviceNullSign && this.medicalNullSign) {
+        this.saveData()
+      }
+    },
+    // 保存数据(实际是编辑)
+    saveData () {
+      let _this = this
+      // console.log(_this.existId)
+      let id = !_this.existId === true ? _this.planId : _this.existId
+      console.log(id)
+      _this.executiveUnit.divingWorkData = this.divingWorkData
+      _this.executiveUnit.medicalSecuryData = this.medicalSecuryData
+      _this.executiveUnit.deviceSecuryData = this.deviceSecuryData
+      _this.stingData = JSON.stringify(_this.executiveUnit)
+      // console.log(_this.planId)
+      _this.$http({
+        url: _this.$http.adornUrl('/dive/makePlan/update'),
+        method: 'POST',
+        data: _this.$http.adornData({
+          'id': id,
+          'executiveUnit': _this.stingData
+        })
+      }).then(({data}) => {
+        console.log(data)
+        if (data && data.code === 0) {
+          // console.log(data)
+          this.$message({
+            message: '保存数据成功',
+            type: 'success'
+          })
+        } else {
+          this.$message.error('保存数据失败，请重新选择数据或者新建数据')
+        }
+      })
+    },
+    // 展示数据
+    getTableData () {
+      let _this = this
+      // console.log(this.existId)
+      _this.$http({
+        url: _this.$http.adornUrl('/dive/makePlan/info/' + this.existId),
+        method: 'POST'
+      }).then(({data}) => {
+        console.log(data)
+        if (data && data.code === 0) {
+          // console.log(data)
+          if (!data.data.executiveUnit) {
+          } else {
+            let jsonData = JSON.parse(data.data.executiveUnit)
+            this.divingWorkData = jsonData.divingWorkData
+            // 医学保障
+            this.medicalSecuryData = jsonData.medicalSecuryData
+            // 设备保障
+            this.deviceSecuryData = jsonData.deviceSecuryData
+          }
+        } else {
+          this.$message.error(data.msg)
+        }
+      })
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+    .box_one {
+        margin: 0 auto;
+        background: #ffffff;
+        height: 840px;
+        width: 96%;
+        margin-top: 39px;
+        overflow: hidden;
+        position: relative;
+        .right {
+            width:180px;
+            display: flex;
+            justify-content: space-between;
+          }
+    }
+    .box_two {
+        height: 455px;
+        width: 100%;
+        border: 1px solid #8AB6E2;
+    }
+    .box_three {
+        width: 80%;
+        margin: 40px auto;
+        .block {
+            margin-bottom: 30px;
+        }
+    }
+    
+      // 四张图片
+.one_icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url(../../../assets/img/figure/baocun.png);
+  background-size: 100% 100%;
+  width: 36px;
+  height: 36px;
+  cursor:pointer;
+}
+.one_icon:hover {
+  background: url(../../../assets/img/figure/baocun_select.png);
+  background-size: 100% 100%;
+  width: 36px;
+  height: 36px;
+}
+.two_icon {
+  background: url(../../../assets/img/figure/dayin.png);
+  background-size: 100% 100%;
+  width: 36px;
+  height: 36px;
+  cursor:pointer;
+}
+.two_icon:hover {
+  background: url(../../../assets/img/figure/dayin_select.png);
+  background-size: 100% 100%;
+  width: 36px;
+  height: 36px;
+}
+.three_icon {
+  background: url(../../../assets/img/figure/help_icon.png);
+  background-size: 100% 100%;
+  width: 36px;
+  height: 36px;
+  cursor:pointer;
+}
+.three_icon:hover {
+  background: url(../../../assets/img/figure/help_select.png);
+  background-size: 100% 100%;
+  width: 36px;
+  height: 36px;
+}
+.four_icon {
+  background: url(../../../assets/img/figure/guanbi.png);
+  background-size: 100% 100%;
+  width: 36px;
+  height: 36px;
+  cursor:pointer;
+}
+.four_icon:hover {
+  background: url(../../../assets/img/figure/guanbi_select.png);
+  background-size: 100% 100%;
+  width: 36px;
+  height: 36px;
+}
+.color {
+  height: 20px;
+  background: rgba(77, 77, 77, 1);
+  margin-bottom: 0;
+}
+//icon图标大小
+.minus .el-icon-minus {
+  font-size: 36px;
+  background: rgba(244, 244, 244, 1);
+  border: 2px solid rgba(98, 98, 98, 1);
+  opacity: 0.21;
+  border-radius: 2px;
+  margin: 0 5px;
+}
+.minus .el-icon-plus {
+  font-size: 36px;
+  background: rgba(244, 244, 244, 1);
+  border: 2px solid rgba(98, 98, 98, 1);
+  opacity: 0.21;
+  border-radius: 2px;
+}
+</style>
+
+<style lang="scss">
+.perform {
+//去掉选项卡下面的横线
+.el-tabs__nav-wrap::after {
+  content: "";
+  position: absolute;
+  width:80%;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: #e4e7ed;
+  z-index: 1;
+}
+.el-tabs__header {
+  width:80%;
+}
+//去掉选项卡下面的横线
+.box_one {
+  .el-tabs__active-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background-color: #ffffff;
+  z-index: 1;
+}
+//选项卡字体颜色
+.el-tabs__item.is-active {
+  color: #1288ff;
+}
+//选项卡的颜色
+.el-tabs__item:hover {
+  color: #1288ff;
+  cursor: pointer;
+}
+//选项卡的字体
+.el-tabs__item {
+  font-size: 24px;
+  font-family: PingFang-SC-Regular;
+  color: rgba(153, 153, 153, 1);
+  padding: 0px 30px;
+}
+
+.cell {
+  font-family: PingFang-SC-Medium;
+  font-size: 18px;
+  color: rgba(102, 102, 102, 1);
+}
+}
+  .txt {
+        border-right: 1px solid rgba(170, 206, 254, 1);
+        width: 3px;
+      }
+ .el-input--medium .el-input__inner {
+  height: 36px;
+  line-height: 36px;
+  border: 1px;
+}
+}
+</style>
+

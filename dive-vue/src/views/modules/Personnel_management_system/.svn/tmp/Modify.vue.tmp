@@ -1,0 +1,595 @@
+<template>
+  <div>
+    <common-header :headChange="headChange"></common-header>
+    <div class="box">
+      <div class="modify">
+        <!-- 标题 -->
+        <el-row :gutter="20">
+          <el-col :span="22" :offset="1">
+            <div class="title_one">人员检索</div>
+          </el-col>
+        </el-row>
+        <!-- 表单 -->
+        <div class="form_retrieval">
+          <div class="kuang">
+            <el-form :inline="true" :model="formInline" class="demo-form-inline" size="mini">
+              <el-row>
+                <el-col :span="6">
+                  <el-form-item>
+                    <div slot="label">编&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：</div>
+                    <el-input v-model="formInline.number" placeholder></el-input>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="6">
+                  <el-form-item>
+                    <div slot="label">单位：</div>
+                    <el-input v-model="formInline.institution" placeholder></el-input>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="6">
+                  <el-form-item>
+                    <div slot="label">等&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级：</div>
+                    <el-select v-model="formInline.skillGrade" placeholder>
+                      <el-option label="1级" value="1"></el-option>
+                      <el-option label="2级" value="2"></el-option>
+                      <el-option label="3级" value="3"></el-option>
+                      <el-option label="4级" value="4"></el-option>
+                      <el-option label="5级" value="5"></el-option>
+                      <el-option label="6级" value="6"></el-option>
+                      <el-option label="学员" value="7"></el-option>
+                    </el-select>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="6">
+                  <el-form-item>
+                    <div slot="label">军衔：</div>
+                    <el-select v-model="formInline.militaryRank" placeholder>
+                      <el-option label="大校" value="1"></el-option>
+                      <el-option label="上校" value="2"></el-option>
+                      <el-option label="中校" value="3"></el-option>
+                      <el-option label="少校" value="4"></el-option>
+                      <el-option label="上尉" value="5"></el-option>
+                      <el-option label="中尉" value="6"></el-option>
+                      <el-option label="少尉" value="7"></el-option>
+                      <el-option label="学员" value="8"></el-option>
+                      <el-option label="一级军士长" value="9"></el-option>
+                      <el-option label="二级军士长" value="10"></el-option>
+                      <el-option label="三级军士长" value="11"></el-option>
+                      <el-option label="四级军士长" value="12"></el-option>
+                      <el-option label="上士" value="13"></el-option>
+                      <el-option label="中士" value="14"></el-option>
+                      <el-option label="下士" value="15"></el-option>
+                      <el-option label="列兵" value="16"></el-option>
+                      <el-option label="上等兵" value="17"></el-option>
+                    </el-select>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+
+              <el-row>
+                <el-col :span="6">
+                  <el-form-item>
+                    <div slot="label">婚&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姻：</div>
+                    <el-select v-model="formInline.marriageStatus" placeholder>
+                      <el-option label="已婚" value="1"></el-option>
+                      <el-option label="未婚" value="2"></el-option>
+                      <el-option label="离异" value="3"></el-option>
+                    </el-select>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="6">
+                  <el-form-item>
+                    <div slot="label">籍贯：</div>
+                    <el-input v-model="formInline.nativePlace" placeholder="请输入关键字"></el-input>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                  <span class="el-form-item__label">首次潜水：</span>
+                  <el-date-picker
+                    v-model="formInline.firstDiveExperienceTime"
+                    type="daterange"
+                    range-separator="至"
+                    value-format="yyyy-MM-dd HH:mm:ss"
+                    size="mini"
+                    start-placeholder="开始日期"
+                    end-placeholder="结束日期">
+                  </el-date-picker>
+                  <el-button type="primary" @click="onSubmit" size="mini">查询</el-button>
+                </el-col>
+              </el-row>
+
+              <el-col :span="12">
+                <span class="el-form-item__label">入伍日期：</span>
+                <el-date-picker
+<<<<<<< .mine
+                  v-model="formInline.enlistedTime"
+=======
+                  v-model="value2"
+>>>>>>> .r26882
+                  type="daterange"
+                  value-format="yyyy-MM-dd HH:mm:ss"
+                  range-separator="至"
+                  start-placeholder="开始日期"
+                  end-placeholder="结束日期"
+                  size="mini"
+                ></el-date-picker>
+              </el-col>
+              <el-col :span="12">
+                <span class="el-form-item__label">出生日期：</span>
+                <el-date-picker
+<<<<<<< .mine
+                  v-model="formInline.birthday"
+=======
+                  v-model="value3"
+>>>>>>> .r26882
+                  type="daterange"
+                  value-format="yyyy-MM-dd HH:mm:ss"
+                  range-separator="至"
+                  size="mini"
+                  start-placeholder="开始日期"
+                  end-placeholder="结束日期"
+                ></el-date-picker>
+              </el-col>
+            </el-form>
+          </div>
+        </div>
+        <!-- 标题 -->
+        <el-row :gutter="20">
+          <el-col :span="22" :offset="1">
+            <div class="title_two">潜水人员信息库</div>
+          </el-col>
+        </el-row>
+        <!-- 表单 -->
+        <el-row :gutter="20">
+          <el-col :span="22" :offset="1">
+            <div class="function_keys">
+              <div class="top">
+                <div class="left">
+                  <el-button type="primary">查看/修改</el-button>
+                </div>
+                <div class="right">
+                  <div class="one_icon"></div>
+                  <div class="two_icon"></div>
+                  <div class="three_icon"></div>
+                  <div class="four_icon"></div>
+                </div>
+              </div>
+              <div class="bottom">
+                <el-table
+                  border
+                  :data="tableData"
+                  tooltip-effect="dark"
+                  style="width: 100%"
+                  @current-change="handleSelectionChange"
+                  highlight-current-row 
+                >
+                  <el-table-column label="选中" width="60">
+                    <template slot-scope="scope">
+                      <el-checkbox v-model="scope.row.checked"></el-checkbox>
+                    </template>
+                  </el-table-column>
+                  <el-table-column label="编号" width="140">
+                    <template slot-scope="scope">{{ scope.row.number }}</template>
+                  </el-table-column>
+                  <el-table-column prop="name" label="姓名" width="120"></el-table-column>
+                  <el-table-column prop="institution" label="单位" show-overflow-tooltip></el-table-column>
+                  <el-table-column prop="skillGrade" label="等级" width="120"></el-table-column>
+                  <el-table-column prop="militaryRank" label="军衔" width="120"></el-table-column>
+                  <el-table-column prop="firstDive" label="首次潜水日期" width="180"></el-table-column>
+                </el-table>
+              </div>
+              <!-- 分页 -->
+              <div class="paging">
+                <el-pagination
+                  background
+                  @size-change="handleSizeChange"
+                  @current-change="handleCurrentChange"
+                  :current-page="currentPage"
+                  :page-size="pageSize"
+                  layout="slot, prev, pager, next, jumper"
+                  :total="Number(totalCount)"
+                  style="margin-top:20px;"
+                  >
+                  <span style="width:49%; margin-left:2%; margin-bottom:1%;">本页显示：{{(currentPage-1)*pageSize+1}}-{{currentPage*pageSize}} &nbsp;&nbsp;总记录数：{{totalCount}}</span>
+                </el-pagination>
+              </div>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+      <div class="color"></div>
+    </div>
+  </div>
+</template>
+
+<script>
+import commonHeader from '../../common/base/Header'
+import headerIcon from '@/assets/img/icon/header/personal.png'
+export default {
+  name: 'Modify',
+  components: {
+    commonHeader
+  },
+  data () {
+    return {
+      value1: '',
+      value2: "",
+      value3: "",
+      headChange: {
+        title: '潜水人员管理系统',
+        headIcon: headerIcon
+      },
+      // firstDiveExperienceTimeStart: '',
+      // firstDiveExperienceTimeEnd: '',
+      // enlistedTimeStart: '',
+      // enlistedTimeEnd: '',
+      // birthdayStart: '',
+      // birthdayEnd: '',
+      formInline: {
+<<<<<<< .mine
+        'number': '',
+        'institution': '',
+        'skillGrade': '',
+        'militaryRank': '',
+        'marriageStatus': '',
+        'nativePlace': '',
+        'firstDiveExperienceTime': '',
+        'enlistedTime': '',
+        'birthday': ''
+=======
+        "number": "",
+        "institution": "",
+        "skillGrade": "",
+        "militaryRank": "",
+        "marriageStatus": "",
+        "nativePlace": "",
+        "firstDiveExperienceTimeStart": "",
+        "firstDiveExperienceTimeEnd": "",
+        "enlistedTimeStart": "",
+        "enlistedTimeEnd": "",
+        "birthdayStart": "",
+        "birthdayEnd": "",
+        "query": {
+        "currPage": "1",
+        "limit": "10"
+    }
+>>>>>>> .r26882
+      },
+      tableData: [],
+      // 当前页数
+      currentPage: 1,
+      // 总页数
+      totalPage: '',
+      // 总记录数
+      totalCount: '',
+      // 每页显示多少条
+      pageSize: 10,
+      // 每页显示多少条
+      query: {
+        currPage: this.currentPage,
+        pageSize: this.pageSize
+      }
+    }
+  },
+  mounted () {
+    let _this = this
+    _this.getTableData()
+  },
+  computed: {
+    // 首次潜水开始时间
+    firstDiveExperienceTimeStart: {
+      get () {
+        if (this.formInline.firstDiveExperienceTime !== '') {
+          return this.formInline.firstDiveExperienceTime[0]
+        } else {
+          return ''
+        }
+      }
+    },
+    firstDiveExperienceTimeEnd: {
+      // 首次潜水结束时间
+      get () {
+        if (this.formInline.firstDiveExperienceTime !== '') {
+          return this.formInline.firstDiveExperienceTime[1]
+        } else {
+          return ''
+        }
+      }
+    },
+    enlistedTimeStart: {
+      // 入伍开始时间
+      get () {
+        if (this.formInline.enlistedTime !== '') {
+          return this.formInline.enlistedTime[0]
+        } else {
+          return ''
+        }
+      }
+    },
+    enlistedTimeEnd: {
+      // 入伍结束时间
+      get () {
+        if (this.formInline.enlistedTime !== '') {
+          return this.formInline.enlistedTime[1]
+        } else {
+          return ''
+        }
+      }
+    },
+    birthdayStart: {
+      // 生日开始时间
+      get () {
+        if (this.formInline.birthday !== '') {
+          return this.formInline.birthday[0]
+        } else {
+          return ''
+        }
+      }
+    },
+    birthdayEnd: {
+      // 生日结束时间
+      get () {
+        if (this.formInline.birthday !== '') {
+          return this.formInline.birthday[1]
+        } else {
+          return ''
+        }
+      }
+    }
+  },
+  methods: {
+<<<<<<< .mine
+    onSubmit () {
+      console.log('submit!')
+      // console.log(this.firstDiveExperienceTimeStart, this.firstDiveExperienceTimeEnd, this.enlistedTimeStart, this.enlistedTimeEnd)
+      this.getTableData()
+    },
+    getTableData () {
+      this.$http({
+        url: this.$http.adornUrl('/dive/diver/list'),
+        method: 'POST',
+        data: this.$http.adornData({
+          'number': this.formInline.number,
+          'institution': this.formInline.institution,
+          'skillGrade': this.formInline.skillGrade,
+          'militaryRank': this.formInline.militaryRank,
+          'marriageStatus': this.formInline.marriageStatus,
+          'nativePlace': this.formInline.nativePlace,
+          'firstDiveExperienceTimeStart': this.formInline.firstDiveExperienceTimeStart,
+          'firstDiveExperienceTimeEnd': this.formInline.firstDiveExperienceTimeEnd,
+          'enlistedTimeStart': this.formInline.enlistedTimeStart,
+          'enlistedTimeEnd': this.formInline.enlistedTimeEnd,
+          'birthdayStart': this.formInline.birthdayStart,
+          'birthdayEnd': this.formInline.birthdayEnd,
+          'query': this.query
+        })
+=======
+    onSubmit() {
+      let _this = this
+      _this.formInline.firstDiveExperienceTimeStart = _this.value1[0]
+      _this.formInline.firstDiveExperienceTimeEnd = _this.value1[1]
+      _this.$http({
+        url: _this.$http.adornUrl("/dive/diver/list"),
+        method: "POST",
+        data: _this.formInline,
+        contentType:'application/json',
+        dataType:'json'
+>>>>>>> .r26882
+      }).then(({data}) => {
+        console.log(data)
+        if (data && data.code === 0) {
+          // data.page.list.forEach(item => {
+            // item.checked = false
+          // })
+          // 总条数
+          this.totalPage = data.page.totalPage
+          // 总记录数
+          this.totalCount = data.page.totalCount
+          // 当前页
+          this.currentPage = data.page.currPage
+          // 一页多少条
+          this.pageSize = data.page.pageSize
+          this.tableData = data.page.list
+        }
+      })
+    },
+    // 当选择项发生变化时触发
+    handleSelectionChange (val) {
+      // console.log(val)
+      this.tableData.forEach(item => {
+        if (item.id !== val.id) {
+          item.checked = false
+        }
+      })
+    },
+    handleSizeChange (val) {
+      console.log(`每页 ${val} 条`)
+    },
+    handleCurrentChange (val) {
+      console.log(`当前页: ${val}`)
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+// 四张图片
+.one_icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url(../../../assets/img/figure/baocun.png);
+  background-size: 100% 100%;
+  width: 30px;
+  height: 29px;
+}
+.one_icon:hover {
+  background: url(../../../assets/img/figure/baocun_select.png);
+  background-size: 100% 100%;
+  width: 30px;
+  height: 29px;
+}
+.two_icon {
+  background: url(../../../assets/img/figure/dayin.png);
+  background-size: 100% 100%;
+  width: 30px;
+}
+.two_icon:hover {
+  background: url(../../../assets/img/figure/dayin_select.png);
+  background-size: 100% 100%;
+  width: 30px;
+  height: 29px;
+}
+.three_icon {
+  background: url(../../../assets/img/figure/help_icon.png);
+  background-size: 100% 100%;
+  width: 30px;
+}
+.three_icon:hover {
+  background: url(../../../assets/img/figure/help_select.png);
+  background-size: 100% 100%;
+  width: 30px;
+  height: 29px;
+}
+.four_icon {
+  background: url(../../../assets/img/figure/guanbi.png);
+  background-size: 100% 100%;
+  width: 30px;
+}
+.four_icon:hover {
+  background: url(../../../assets/img/figure/guanbi_select.png);
+  background-size: 100% 100%;
+  width: 30px;
+  height: 29px;
+}
+.color {
+  height: 20px;
+  background: rgba(77, 77, 77, 1);
+}
+.paging {
+  height: 50px;
+}
+// 背景
+.modify {
+  background: #eeeeee;
+  width: 100%;
+  min-height: 900px;
+  overflow: hidden;
+}
+// 标题
+.title_one {
+  width: 120px;
+  height: 40px;
+  font-size: 30px;
+  font-family: PingFang-SC-Regular;
+  font-weight: bold;
+  color: rgba(77, 77, 77, 1);
+  border-bottom: 3px solid #1288ff;
+  margin-top: 30px;
+}
+// 标题2
+.title_two {
+  width: 210px;
+  height: 40px;
+  font-size: 30px;
+  font-family: PingFang-SC-Regular;
+  font-weight: bold;
+  color: rgba(77, 77, 77, 1);
+  border-bottom: 3px solid #1288ff;
+  margin-top: 30px;
+}
+// 表单
+.form_retrieval {
+  background: #ffffff;
+  min-height: 240px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 92%;
+  margin: 15px auto;
+}
+//表格
+.function_keys {
+  background: #ffffff;
+  min-height: 240px;
+  margin-top: 15px;
+  margin-bottom: 100px;
+  .top {
+    height: 60px;
+    width: 96%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .right {
+      width: 145px;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  .bottom {
+    width: 96%;
+    margin: 0 auto;
+    min-height: 370px;
+  }
+}
+//居中
+.kuang {
+  width: 94%;
+  min-height: 110px;
+}
+.el-date-editor {
+  width: 66%;
+}
+
+.line_two {
+  display: inline-block;
+}
+@media (max-width: 768px) {
+  .l .el-form-item--medium {
+    margin-right: 0px !important;
+    margin-left: 0px;
+  }
+  .m .el-form-item__label {
+    margin-left: 0px;
+  }
+  .line_two {
+    margin-top: 20px;
+  }
+}
+</style>
+<style lang="scss">
+.l {
+  width: 100px !important;
+}
+
+/* 分页 */
+.top .el-button--primary {
+  background-color: #1288ff;
+  border-color: #1288ff;
+}
+.paging .el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: #1288ff;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .paging .btn-prev {
+    margin-left: 0px !important;
+  }
+}
+.el-form-item__label {
+  font-family: PingFang-SC-Regular;
+  font-size: 18px;
+  color: rgba(51, 51, 51, 1);
+}
+
+.modify .el-form-item__content {
+  width: 58%;
+}
+.modify .el-table {
+  font-size: 18px;
+}
+</style>
+

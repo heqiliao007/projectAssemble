@@ -1,0 +1,242 @@
+<template>
+<div>
+<<<<<<< .mine
+    <div style="background:#eeeeee; min-height:840px; overflow: hidden;">
+        <div class="box_one">
+            <el-form ref="form" :model="form" label-width="140px" style="margin:0 auto; width:75%; margin-top: 50px;">
+                <el-form-item>
+                    <div slot="label" style="font-size:18px;">项目名称：</div>
+                    <el-input v-model="form.name"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <div slot="label" style="font-size:18px;">目的任务：</div>
+                    <el-input v-model="form.task"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <div slot="label" style="font-size:18px;">基本内容：</div>
+                    <el-input v-model="form.content"></el-input>
+                </el-form-item>
+                <el-form-item>
+                    <div slot="label" style="font-size:18px;">实施节点：</div>
+                    <div class="box_two">
+                        <div class="box_three">
+                            <div class="block">
+                                <span style="font-size:18px; padding-right:15px;">计划制定</span>
+                                <el-date-picker
+                                v-model="form.formulate"
+                                type="daterange"
+                                style="width:70%;"
+                                range-separator="-"
+                                start-placeholder="开始日期"
+                                end-placeholder="结束日期">
+                                </el-date-picker>
+                            </div>
+                            <div class="block">
+                                <span style="font-size:18px; padding-right:15px;">物品准备</span>
+                                <el-date-picker
+                                v-model="form.devicePreparation"
+                                type="daterange"
+                                style="width:70%;"
+                                range-separator="-"
+                                start-placeholder="开始日期"
+                                end-placeholder="结束日期">
+                                </el-date-picker>
+                            </div>
+                            <div class="block">
+                                <span style="font-size:18px; padding-right:15px;">人员准备</span>
+                                <el-date-picker
+                                v-model="form.personPreparation"
+                                type="daterange"
+                                style="width:70%;"
+                                range-separator="-"
+                                start-placeholder="开始日期"
+                                end-placeholder="结束日期">
+                                </el-date-picker>
+                            </div>
+                            <div class="block">
+                                <span style="font-size:18px; padding-right:15px;">潜水作业</span>
+                                <el-date-picker
+                                v-model="form.diving"
+                                type="daterange"
+                                style="width:70%;"
+                                range-separator="-"
+                                start-placeholder="开始日期"
+                                end-placeholder="结束日期">
+                                </el-date-picker>
+                            </div>
+                            <div class="block">
+                                <span style="font-size:18px; padding-right:15px;">总结汇报</span>
+                                <el-date-picker
+                                v-model="form.report"
+                                type="daterange"
+                                style="width:70%;"
+                                range-separator="-"
+                                start-placeholder="开始日期"
+                                end-placeholder="结束日期">
+                                </el-date-picker>
+                            </div>
+                        </div>
+=======
+    <!-- <common-header :headChange="headChange"></common-header>
+    <div class="box">
+        <el-row  class="plan">
+            <el-col :span="4">
+                <common-plan-sidebar :curIndex='curIndex'></common-plan-sidebar>
+            </el-col>
+            <el-col :span="20"> -->
+                <div style="background:#eeeeee; min-height:840px; overflow: hidden;">
+                    <div class="box_one">
+                        <el-form ref="form" :model="form" label-width="140px" style="margin:0 auto; width:75%; margin-top: 50px;">
+                            <el-form-item>
+                                <div slot="label" style="font-size:18px;">项目名称：</div>
+                                <el-input v-model="form.name"></el-input>
+                            </el-form-item>
+                            <el-form-item>
+                                <div slot="label" style="font-size:18px;">目的任务：</div>
+                                <el-input v-model="form.name"></el-input>
+                            </el-form-item>
+                            <el-form-item>
+                                <div slot="label" style="font-size:18px;">基本内容：</div>
+                                <el-input v-model="form.name"></el-input>
+                            </el-form-item>
+                            <el-form-item>
+                                <div slot="label" style="font-size:18px;">实施节点：</div>
+                                <div class="box_two">
+                                    <div class="box_three">
+                                        <div class="block">
+                                            <span style="font-size:18px; padding-right:15px;">计划制定</span>
+                                            <el-date-picker
+                                            v-model="value1"
+                                            type="daterange"
+                                            style="width:70%;"
+                                            range-separator="-"
+                                            start-placeholder="开始日期"
+                                            end-placeholder="结束日期">
+                                            </el-date-picker>
+                                        </div>
+                                        <div class="block">
+                                            <span style="font-size:18px; padding-right:15px;">物品准备</span>
+                                            <el-date-picker
+                                            v-model="value1"
+                                            type="daterange"
+                                            style="width:70%;"
+                                            range-separator="-"
+                                            start-placeholder="开始日期"
+                                            end-placeholder="结束日期">
+                                            </el-date-picker>
+                                        </div>
+                                        <div class="block">
+                                            <span style="font-size:18px; padding-right:15px;">人员准备</span>
+                                            <el-date-picker
+                                            v-model="value1"
+                                            type="daterange"
+                                            style="width:70%;"
+                                            range-separator="-"
+                                            start-placeholder="开始日期"
+                                            end-placeholder="结束日期">
+                                            </el-date-picker>
+                                        </div>
+                                        <div class="block">
+                                            <span style="font-size:18px; padding-right:15px;">潜水作业</span>
+                                            <el-date-picker
+                                            v-model="value1"
+                                            type="daterange"
+                                            style="width:70%;"
+                                            range-separator="-"
+                                            start-placeholder="开始日期"
+                                            end-placeholder="结束日期">
+                                            </el-date-picker>
+                                        </div>
+                                        <div class="block">
+                                            <span style="font-size:18px; padding-right:15px;">总结汇报</span>
+                                            <el-date-picker
+                                            v-model="value1"
+                                            type="daterange"
+                                            style="width:70%;"
+                                            range-separator="-"
+                                            start-placeholder="开始日期"
+                                            end-placeholder="结束日期">
+                                            </el-date-picker>
+                                        </div>
+                                    </div>
+                                </div>
+                            </el-form-item>
+                            <el-form-item style="float: right;">
+                                <el-button type="primary" @click="onSubmit" size="medium" style="background:#1288FF">确定</el-button>
+                            </el-form-item>
+                            </el-form>
+>>>>>>> .r27188
+                    </div>
+                </el-form-item>
+                <el-form-item style="float: right;">
+                    <el-button type="primary" @click="onSubmit" size="medium" style="background:#1288FF">确定</el-button>
+                </el-form-item>
+            </el-form>
+        </div>
+    </div>
+</div>
+    
+</template>
+
+<script>
+import { mapMutations } from 'vuex'
+
+export default {
+  name: 'Mission_profile',
+  data () {
+    return {
+      form: {
+        name: '',
+        task: '',
+        content: '',
+        formulate: '',
+        devicePreparation: '',
+        personPreparation: '',
+        diving: '',
+        report: ''
+      }
+    }
+  },
+  created () {
+    this['sidebar/changePlanIndex'](0)
+    console.log(this.form.formulate)
+  },
+  methods: {
+    onSubmit () {
+    //   console.log('submit!')
+      console.log(this.form.formulate)
+    },
+    ...mapMutations(['sidebar/changePlanIndex'])
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+    .plan{
+        background-color: #eeeeee;
+        display: flex;
+        -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+        align-items: stretch;
+    }
+    .box_one {
+        margin: 0 auto;
+        background: #ffffff;
+        height: 840px;
+        width: 96%;
+        margin-top: 39px;
+        overflow: hidden;
+    }
+    .box_two {
+        height: 455px;
+        width: 100%;
+        border: 1px solid #8AB6E2;
+    }
+    .box_three {
+        width: 80%;
+        margin: 40px auto;
+        .block {
+            margin-bottom: 30px;
+        }
+    }
+</style>

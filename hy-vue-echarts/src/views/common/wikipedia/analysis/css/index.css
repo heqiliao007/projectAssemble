@@ -1,0 +1,25 @@
+.analysis {
+  width: 1920px;
+}
+.analysis .body-analysis > div {
+  display: inline-block;
+  vertical-align: top;
+}
+.analysis .body-analysis > div ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.analysis .body-analysis > div h1, .analysis .body-analysis > div h2, .analysis .body-analysis > div h3, .analysis .body-analysis > div h4, .analysis .body-analysis > div h5, .analysis .body-analysis > div h6 {
+  margin: 0;
+}
+.analysis .body-analysis .left-dimension-measure {
+  width: 193px;
+  background-color: bisque;
+}
+.analysis .body-analysis .left-screen {
+  width: 150px;
+  background-color: aqua;
+}
+
+/*# sourceMappingURL=index.css.map */

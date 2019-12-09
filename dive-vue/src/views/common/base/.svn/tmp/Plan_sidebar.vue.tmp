@@ -1,0 +1,100 @@
+<template>
+    <div class="side">
+        <img :src="gradualChange"/>
+        <div class="sidebar">
+            <ul class="sidebar-list" v-if="curIndex > -1">
+                <router-link to="{name: "+item.link+"}" tag="li" v-for="(item,index) in contObj" :key="index" style="cursor:pointer;">
+                    <img :src="xuanzhong" v-if="index === curIndex"/>
+                    <img :src="jiantou" v-else/>
+                    {{item.title}}
+                </router-link>
+                <!-- <li><img :src="jiantou"/>执行单位</li>
+                <li><img :src="jiantou"/>潜水装备</li>
+                <li><img :src="jiantou"/>潜水方案</li>
+                <li><img :src="jiantou"/>呼吸气体</li>
+                <li><img :src="jiantou"/>物资准备</li>
+                <li><img :src="jiantou"/>人员准备</li>
+                <li><img :src="jiantou"/>潜水后事项</li>
+                <li><img :src="jiantou"/>专家保障</li> -->
+            </ul>
+            <ul class="sidebar-list" v-else>
+                <li v-for="(item,index) in contArr" :key="index">
+                    <img :src="xuanzhong" v-if="index === curIndex"/>
+                    <img :src="jiantou" v-else/>
+                    {{item}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</template>
+
+<script>
+import gradualChange from '@/assets/img/figure/jianbian.png'
+import jiantou from '@/assets/img/figure/jiantou.png'
+import xuanzhong from '@/assets/img/figure/xuanzhong.png'
+
+export default {
+  name: 'CommonPlanSidebar',
+  data () {
+    return {
+      gradualChange: gradualChange,
+      jiantou: jiantou,
+      xuanzhong: xuanzhong,
+      contObj: {
+        // contArr: ['任务概况', '执行单位', '潜水装备', '潜水方案', '呼吸气体', '物资准备', '人员准备', '潜水后事项', '专家保障', '风险控制']
+        contArr: [
+            { 'title': '任务概况', 'link': 'Doe' }
+        ]
+      }
+    }
+  },
+  props: {
+    headChange: Object,
+    curIndex: Number
+  },
+  methods: {
+
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+    @import '~@/assets/scss/index.scss';
+    .side{
+        height: 100%;
+        color: $color-bg-white;
+        font-size: $text-size-medium-l;
+        background-color:  $color-bg;
+        &>img{
+            width: 100%;
+            height: 47px;
+        }
+        .sidebar{
+            height: calc(100% - 47px);
+            background: -webkit-linear-gradient($color-bg-blue, $color-light-blue);
+            background: -o-linear-gradient($color-bg-blue, $color-light-blue);
+            background: -moz-linear-gradient($color-bg-blue, $color-light-blue);
+            background: linear-gradient($color-bg-blue, $color-light-blue);
+            .sidebar-list{
+                margin: 0;
+                height: calc(100-47px);
+                padding: 40px 0 0px;
+                text-align: center;
+                li{
+                    text-align: left;
+                    padding: 0px 15px 0px 35px;
+                    height: 69px;
+                    line-height: 69px;
+                    border-bottom: 1px solid #59A8F7;
+                    &:last-child{
+                        border-bottom: none;
+                    }
+                    img{
+                        margin-right:23px;
+                    }
+                }
+            }
+        }
+    }
+    
+</style>

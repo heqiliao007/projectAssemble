@@ -1,0 +1,44 @@
+// 站点主色
+// tips: 要达到整站主题修改效果, 请确保[$--color-primary]站点主色与[/src/element-ui-theme/index.js]文件中[import './element-[#17B3A3]/index.css']当前主题色一致
+$--color-primary: #3E8EF7;
+// 17B3A3
+// Navbar
+$navbar--background-color: #4D4D4D;
+
+// Sidebar
+$sidebar--background-color-dark: #263238;
+$sidebar--color-text-dark: #fff;
+
+// Content
+$content--background-color: #f1f4f5;
+
+
+// 颜色定义规范
+$color-bg: #eee;
+$color-bg-blue: #1288FF;
+$color-light-blue: #7CD2F9;
+$color-bg-white: #fff;
+$color-text-black: #4D4D4D;
+$color-text-333: #333;
+$color-text-666: #666;
+$color-text-999: #999;
+$color-text-62: #626262;
+$color-bg-checkbox: #B5B5B5;
+$color-border: #F4F4F4;
+$color-border-blue: #AACEFE;
+
+// 字体基础
+$text-size14: 14px;
+$text-size16: 16px;
+$text-size18: 18px;
+$text-size22: 22px;
+$text-size24: 24px;
+$text-size26: 26px;
+
+$text-size-small: 18px;
+$text-size-medium: 20px;
+$font-size-medium-x: 22px;
+$text-size-medium-l: 24px;
+$text-size-large: 28px;
+$text-size-large-l: 32px;
+

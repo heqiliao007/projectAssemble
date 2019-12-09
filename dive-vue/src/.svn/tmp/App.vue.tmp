@@ -1,0 +1,20 @@
+<template>
+  <transition name="fade">
+    <router-view></router-view>
+  </transition>
+</template>
+
+<script>
+  export default {
+  }
+</script>
+<<<<<<< .mine
+<style lang='scss'>
+  html,body{height:100%}
+=======
+<style lang="scss">
+  html,body {
+    height: 100%;
+  }
+>>>>>>> .r26362
+</style>

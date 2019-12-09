@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/hisw/!svn/ver/27335/dive_system/dive-vue/src/router
+END
+index.js
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/hisw/!svn/ver/27335/dive_system/dive-vue/src/router/index.js
+END
+import-development.js
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/hisw/!svn/ver/24658/dive_system/dive-vue/src/router/import-development.js
+END
+import-production.js
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/hisw/!svn/ver/24658/dive_system/dive-vue/src/router/import-production.js
+END

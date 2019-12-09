@@ -1,0 +1,222 @@
+<template>
+  <div>
+    <!-- Header -->
+    <div style="height:150px;">
+      <headEr/>
+    </div>
+    <!-- Memu & Search -->
+    <div style="position: relative;">
+      <div style="background:#FFFFFF;height:60px;">
+        <div style="width: 1200px;margin: 0 auto;">
+          <el-menu
+            :default-active="activeName"
+            class="el-menu-demo"
+            mode="horizontal"
+            active-text-color="#3295D9"
+            text-color="#999999"
+            @select="handleClick"
+          >
+            <el-menu-item :index="rec.id" v-for="rec in recommondData" :key="rec.id">{{rec.name}}</el-menu-item>
+          </el-menu>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;height:50px;" v-if="subMemuList.length > 0">
+        <div style="margin: 0 auto;text-align:center">
+          <ul class="sub-memu">
+            <li
+              class="sub-memu-item"
+              :class="{'sub-memu-item-active':rec.active}"
+              @click="subMemuHandleClick(rec)"
+              :index="rec.id"
+              v-for="rec in subMemuList"
+              :key="rec.id"
+            >{{rec.name}}</li>
+            <div class="search-button" style="display:inline-block" @click="toggleSearchBox">
+              <span>查询</span>
+              <i class="el-icon-hysj-select-arrow"></i>
+            </div>
+          </ul>
+        </div>
+      </div>
+      <div style="clear:both"></div>
+      <div class="search" v-if="isSearching">
+        <div class="search-box">
+          <span>日期:</span>
+          <el-date-picker
+            type="date"
+            size="small"
+            style="width:157px"
+            format="yyyy-MM-dd"
+            prefix-icon="none"
+          ></el-date-picker>
+          <span style="margin-left:56px">影片名称：</span>
+          <el-input type="text" size="small" placeholder="请输入" style="width:120px"></el-input>
+        </div>
+      </div>
+    </div>
+    <!-- Content  -->
+    <div>
+      <div :class="{cover:isSearching}"/>
+      <transition name="el-fade-in">
+        <router-view/>
+      </transition>
+    </div>
+  </div>
+</template>
+
+<script>
+import headEr from "../head/head-er";
+export default {
+  name: "Recommond-Home",
+  data() {
+    return {
+      subMemuList: [],
+      activeName: "1",
+      isSearching: false,
+      recommondData: [
+        { id: "1", name: "智库推荐", path: "/box_office/recommond" },
+        {
+          id: "2",
+          name: "票房分析",
+          children: [
+            { id: "21", name: "影片", path: "/box_office/anlysis" },
+            { id: "22", name: "影院", path: "/box_office/cinema"  },
+            { id: "23", name: "院线", path: "/box_office/cinemaChain" },
+            { id: "24", name: "影投", path: "/box_office/shadowCast" },
+            { id: "25", name: "省份" },
+            { id: "26", name: "城市" },
+            { id: "27", name: "大盘" },
+            { id: "28", name: "海外票房" }
+          ]
+        },
+        { id: "3", name: "排片分析",
+          children: [
+              { id: "31", name: "影片", path: "/box_office/arrange/film"},
+              { id: "32", name: "地域", path: "/box_office/arrange/region"},
+              { id: "33", name: "城市", path: "/box_office/arrange/city"},
+              { id: "34", name: "院线", path: "/box_office/arrange/chians"},
+              { id: "35", name: "影投", path: "/box_office/arrange/invest"},
+              { id: "36", name: "影院", path: "/box_office/arrange/theater"},
+              { id: "37", name: "时段", path: "/box_office/arrange/time"}
+            ]
+         },
+        { id: "4", name: "营销监测" },
+        { id: "5", name: "投资情报" },
+        { id: "6", name: "发行情报" },
+        { id: "7", name: "影院情报" },
+        { id: "8", name: "影院情报" },
+        { id: "9", name: "植入广告" },
+        { id: "10", name: "行业分析" }
+      ]
+    };
+  },
+  methods: {
+    handleClick(args) {
+      var selected = null;
+      for (let i = 0; i < this.recommondData.length; i++) {
+        if (args === this.recommondData[i].id) {
+          selected = this.recommondData[i];
+          break;
+        }
+      }
+      if (selected.children && selected.children.length > 0) {
+        this.subMemuList = selected.children;
+        this.subMemuList.forEach(item => {
+          item.active = false;
+        });
+        return;
+      } else {
+        this.subMemuList = [];
+        this.subMemuList.forEach(item => {
+          item.active = false;
+        });
+      }
+      if (selected.path) {
+        this.$router.push({
+          path: selected.path
+        });
+      }
+    },
+    subMemuHandleClick(selected) {
+      this.subMemuList.forEach(item => {
+        item.active = false;
+      });
+      selected.active = true;
+      if (selected.path) {
+        this.$router.push({
+          path: selected.path
+        });
+      }
+    },
+    toggleSearchBox() {
+      this.isSearching = !this.isSearching;
+    }
+  },
+  mounted() {
+    // this.handleClick(this.activeName);
+  },
+  components: {
+    headEr
+  }
+};
+</script>
+<style lang="scss">
+.search{
+    background:#FFFFFF;
+    position: absolute;
+    top:110px;
+    width:100%;
+    z-index:999;
+}
+.cover {
+  position: absolute;
+  left: 0px;
+  background: #333333;
+  width: 100%; /*宽度设置为100%，这样才能使隐藏背景层覆盖原页面*/
+  height: 100%;
+  filter: alpha(opacity=35); /*设置透明度为60%*/
+  opacity: 0.35; /*非IE浏览器下设置透明度为60%*/
+  z-index: 666;
+}
+.el-menu--horizontal {
+  border-bottom: none;
+}
+body {
+  background: #f5f5f5;
+}
+.sub-memu {
+  line-height: 50px;
+  list-style: none;
+  margin: 0 auto;
+}
+.sub-memu-item:hover {
+  cursor: pointer;
+}
+.sub-memu-item {
+  font-size: 16px;
+  font-weight: 400;
+  display: inline;
+  margin-right: 56px;
+  color: #999999;
+}
+.sub-memu-item-active {
+  color: #333333;
+}
+.el-menu-item {
+  font-size: 16px;
+}
+
+.search-button {
+  float: right;
+  margin-right: 72px;
+}
+.search-button:hover {
+  cursor: pointer;
+}
+.search-box {
+  height: 58px;
+  line-height: 58px;
+  margin: 0 auto;
+  text-align: center;
+}
+</style>
